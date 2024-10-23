@@ -44,7 +44,8 @@ header p {
   cursor: pointer;
   overflow: hidden;
   text-align: center;
-  padding: 15px 10px; /* 텍스트와 이미지 사이에 여백 추가 */
+  padding: 15px 10px;
+  position: relative; /* 텍스트와 이미지 겹침을 위한 설정 */
 }
 
 .cover:hover {
@@ -52,18 +53,90 @@ header p {
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
 
+.cover-content {
+  perspective: 1000px; /* 3D 효과를 위한 설정 */
+  position: relative;
+}
+
+.cover-image,
+.cover-text {
+  backface-visibility: hidden;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+  transform-style: preserve-3d;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.cover-image {
+  z-index: 2;
+  transform: rotateY(0deg);
+  opacity: 1;
+}
+
 .cover-image {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  height: 0;
+  padding-top: 100%; /* 1:1 비율 유지 */
+  position: relative;
   border-bottom: 3px solid #82d3a6;
   overflow: hidden;
 }
 
 .cover img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* 이미지가 컨테이너를 꽉 채우도록 설정 */
   border-radius: 15px;
+}
+
+.cover:hover .cover-image {
+  transform: rotateY(180deg);
+  opacity: 0;
+}
+
+.cover-text {
+  z-index: 1;
+  transform: rotateY(-180deg);
+  opacity: 0;
+}
+
+.cover:hover .cover-text {
+  transform: rotateY(0deg);
+  opacity: 1;
+}
+
+.drawsvg {
+  width: 100%;
+  height: 300px;
+  position: relative;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+}
+
+.image-bg {
+  fill-opacity: 1;
+  animation: fill_offset 8s infinite;
+  animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  font-weight: bold;
+}
+
+.stroke {
+  stroke: #000;
+  stroke-width: 2px;
+  stroke-dasharray: 0 250;
+  stroke-opacity: 1;
+  fill: none;
+  animation: stroke_offset 8s infinite;
+  animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .cover p {
@@ -83,6 +156,44 @@ header p {
   padding: 5px 10px;
   border-radius: 10px;
 }
+
+@keyframes stroke_offset {
+  0%,
+  25% {
+    stroke-dasharray: 0 250;
+    stroke-opacity: 1;
+  }
+  50%,
+  75% {
+    stroke-dasharray: 250 0;
+    stroke-opacity: 0;
+  }
+  100% {
+    stroke-dasharray: 0 250;
+    stroke-opacity: 1;
+  }
+}
+
+@keyframes fill_offset {
+  0%,
+  25% {
+    fill-opacity: 0;
+  }
+  50%,
+  75% {
+    fill-opacity: 1;
+  }
+  100% {
+    fill-opacity: 0;
+  }
+}
+
+#fade-text {
+  font-family: "Alex Brush", cursive;
+  font-size: 8em;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Alex+Brush);
 
 /* 반응형 디자인: 작은 화면에서는 2개씩 */
 @media (max-width: 900px) {
