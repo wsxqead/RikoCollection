@@ -124,7 +124,7 @@
 
       <div
         class="cover"
-        onclick="openPopup('https://www.youtube.com/watch?v=T10fmu7T4eA')"
+        onclick="openVideo('https://www.youtube.com/embed/T10fmu7T4eA')"
       >
         <div class="cover-content">
           <div class="cover-image">
@@ -289,7 +289,7 @@
 
       <div
         class="cover"
-        onclick="openPopup('https://www.youtube.com/watch?v=dglNAGJiDT8')"
+        onclick="openVideo('https://www.youtube.com/watch?v=dglNAGJiDT8')"
       >
         <div class="cover-content">
           <div class="cover-image">
@@ -344,7 +344,7 @@
 
       <div
         class="cover"
-        onclick="openPopup('https://www.youtube.com/watch?v=J49wnPBsyrU')"
+        onclick="openPopup('https://www.youtube.com/embed/J49wnPBsyrU')"
       >
         <div class="cover-content">
           <div class="cover-image">
@@ -399,7 +399,7 @@
 
       <div
         class="cover"
-        onclick="openPopup('https://www.youtube.com/watch?v=c6G7vRuJyhs')"
+        onclick="openVideo('https://www.youtube.com/embed/c6G7vRuJyhs')"
       >
         <div class="cover-content">
           <div class="cover-image">
@@ -451,7 +451,131 @@
         <p>8th: 경화수월</p>
         <span>2024. 11. 21.</span>
       </div>
+
+      <div
+        class="cover"
+        onclick="openPopup('https://www.youtube.com/watch?v=cGjgCLuyAro')"
+      >
+        <div class="cover-content">
+          <div class="cover-image">
+            <img src="cover/cover9.jpg" alt="주름맞추기" />
+          </div>
+          <div class="cover-text">
+            <div class="drawsvg">
+              <svg viewBox="0 0 700 300">
+                <defs>
+                  <pattern
+                    id="bg-image9"
+                    patternUnits="userSpaceOnUse"
+                    width="100%"
+                    height="100%"
+                  >
+                    <image
+                      href="cover/cover9.jpg"
+                      x="-20"
+                      y="-20"
+                      width="700"
+                      height="300"
+                    />
+                  </pattern>
+                </defs>
+                <symbol id="fade-text9">
+                  <text
+                    class="image-bg"
+                    x="50%"
+                    y="50%"
+                    fill="url(#bg-image9)"
+                    text-anchor="middle"
+                    dy=".35em"
+                    font-size="96px"
+                    font-family="sans-serif"
+                    stroke="#cecece"
+                    stroke-width="2px"
+                  >
+                    주름맞추기
+                  </text>
+                </symbol>
+                <g>
+                  <use class="stroke" xlink:href="#fade-text9" />
+                  <use class="image-bg" xlink:href="#fade-text9" />
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <p>9th: 주름맞추기</p>
+        <span>2024. 12. 13.</span>
+      </div>
+
+      <div
+        class="cover"
+        onclick="openVideo('https://www.youtube.com/embed/gXJMNur50m8')"
+      >
+        <div class="cover-content">
+          <div class="cover-image">
+            <img src="cover/cover10.jpg" alt="크리스마스송" />
+          </div>
+          <div class="cover-text">
+            <div class="drawsvg">
+              <svg viewBox="0 0 700 300">
+                <defs>
+                  <pattern
+                    id="bg-image10"
+                    patternUnits="userSpaceOnUse"
+                    width="100%"
+                    height="100%"
+                  >
+                    <image
+                      href="cover/cover10.jpg"
+                      x="-20"
+                      y="-20"
+                      width="700"
+                      height="300"
+                    />
+                  </pattern>
+                </defs>
+                <symbol id="fade-text10">
+                  <text
+                    class="image-bg"
+                    x="50%"
+                    y="50%"
+                    fill="url(#bg-image10)"
+                    text-anchor="middle"
+                    dy=".35em"
+                    font-size="96px"
+                    font-family="sans-serif"
+                    stroke="#cecece"
+                    stroke-width="2px"
+                  >
+                    크리스마스송
+                  </text>
+                </symbol>
+                <g>
+                  <use class="stroke" xlink:href="#fade-text10" />
+                  <use class="image-bg" xlink:href="#fade-text10" />
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <p>10th: 크리스마스송</p>
+        <span>2024. 12. 25.</span>
+      </div>
     </section>
+
+    <div id="videoModal" class="video-modal" style="display: none">
+      <div class="video-container">
+        <button class="close-btn" onclick="closeVideo()">X</button>
+        <iframe
+          id="videoFrame"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen=""
+          frameborder="0"
+          src=""
+          title="YouTube video player"
+        ></iframe>
+      </div>
+    </div>
     <script>
       function openPopup(videoUrl) {
         const width = 560;
@@ -463,6 +587,20 @@
           "popup",
           `width=${width},height=${height},top=${top},left=${left},scrollbars=no,resizable=no`
         );
+      }
+
+      function openVideo(videoUrl) {
+        const modal = document.getElementById("videoModal");
+        const iframe = document.getElementById("videoFrame");
+        iframe.src = videoUrl;
+        modal.style.display = "block";
+      }
+
+      function closeVideo() {
+        const modal = document.getElementById("videoModal");
+        const iframe = document.getElementById("videoFrame");
+        iframe.src = ""; // Clear the video source to stop playback
+        modal.style.display = "none";
       }
     </script>
   </body>
